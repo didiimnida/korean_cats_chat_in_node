@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Annyeonghaseyo!</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+<!--START--> 
+
+<!--LOGO-->
+<div class="container margin-top-20">
+	<div class="logo border-radius-10">
+		Annyeonghaseyo! Korean Cats Chat.
+	</div>
+</div>
+
+<!--NEW CHIRP-->
+<div class="container margin-top-10">
+	<div id="chirp-wrapper" class="border-radius-10">
+
+		<form method="post" action="/new">
+		<div>
+			<textarea id="chirp_text" name="chirp_text" class="form-control" placeholder="You can annyeong here. Make sure it's less than 140 characters!"></textarea>
+		</div>
+		<div class="margin-top-10 txt-right">
+			<button id="cancel-chirp-button" type="button" class="btn btn-default margin-right-10">Cancel</button>
+			<button type="submit" class="btn btn-info">Annyeong!</button>
+		</div>
+		</form>
+
+	</div>
+</div>
+
+<!--DISPLAY CHIRPS-->
+<div class="container margin-top-10">
+	<% for (i=0;i<chirps.length;i++){ %>
+	<div class="one-chirp border-radius-10">
+		<div class="row">
+			<div class="col-sm-2">
+				<!--Need to generate random number here--> 
+				<img src="img/birds/cat<%=i+1%>.png" class="img-responsive" />
+			</div>
+			<div class="col-sm-10">
+				<div class="margin-top-20">
+					<p><%=chirps[i].chirp_text%></p>
+				</div>
+				<div class="margin-top-10 txt-right">
+					<a href="/edit/<%=chirps[i].id%>" class="btn btn-info">Edit Annyeong</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<% } %>
+</div> 
+
+<!--MODAL--> 
+<div id="instructions-modal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">How to Use:</h4>
+			</div>
+			<div class="modal-body">
+				To get started, hold down shift and type "Y". Hold shift and type "N" if you want to cancel.
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal">Choaeyo!</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!--DONE-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+<script src="../js/chirp_main.js"></script>
+
+</body>
+
+</html>
