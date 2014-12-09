@@ -21,11 +21,11 @@ $(document).on("keyup", function(event) {
 		
 		var result = wordsTypes.join("");
 
-		if (result === "Y") {
+		if (result === "HAI") {
 			$("#chirp-wrapper").slideDown(function() {
 				$("#chirp-text").focus();
 			});
-		} else if (result === "N") {
+		} else if (result === "BYE") {
 			$("#chirp-wrapper").slideUp(function() {
 				$("#chirp-text").val("");
 			});
@@ -39,8 +39,8 @@ $(document).on("click", "#cancel-chirp-button", function() {
 	});
 });
 
-// $(document).ready(function() {
-// 	setTimeout(function() {
-// 		$("#instructions-modal").modal("show");
-// 	}, 1000);
-// });
+$(document).ready(function() {
+	setTimeout(function() {
+		$("#instructions-modal").modal("show");
+	}, 1000);
+});

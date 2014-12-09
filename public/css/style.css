@@ -43,11 +43,11 @@ body {
 }
 
 .one-chirp {
-	background-color:black;
+	background-color:#DFDEE3;
 	padding:20px;
 	font-size:1.7em;
 	margin-top:20px;
-	color: white;
+	color: black;
 }
 
 .one-chirp:first-child {

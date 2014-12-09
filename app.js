@@ -29,7 +29,7 @@ app.use(express.static(__dirname + '/public'));
 //Get all:
 app.get('/', function(req, res){
 	models.Chirp.findAll({order: '"createdAt" DESC'}).done(function(error, chirps){
-		res.render(__dirname + '/public/views/index.ejs', {
+		res.render("index", {
 			chirps: chirps
 		});
 	});
@@ -44,23 +44,40 @@ app.post('/new', function(req, res){
 	});
 });
 
-//Get specific: EDIT! Add another parameter.    
-app.get('/edit/:id', function(req, res){
-	models.Chirp.find(req.params.id).success(function(chirp) {
-    	res.render(__dirname + '/public/views/edit.ejs', {
-        	chirp: chirp
+//Get specific: EDIT!     
+// app.get('/edit/:id', function(req, res){
+// 	models.Chirp.find(req.params.id).done(function(error, chirp) {
+//     	res.render("edit", {
+//         	chirp: chirp
+//     	});
+// 	});
+// });
+//This route w/o added param breaks the edit view if don't specify static images path???  Why? 
+
+//Get specific: EDIT! Added another parameter to send through picture #.    
+app.get('/edit/:id/:bird', function(req, res){
+	models.Chirp.find(req.params.id).done(function(error, chirp) {
+    	res.render("edit", {
+        	chirp: chirp, 
+        	bird: req.params.bird
     	});
 	});
 });
 
-//Update
+//Update or delete.
 app.put('/edit/:id', function(req, res){
-	models.Chirp.find(req.params.id).success(function(chirp){
-		chirp.updateAttributes({
-			chirp_text:req.body.chirp_text
-		}).success(function(){
-			res.redirect("/");
-		});
+	models.Chirp.find(req.params.id).done(function(error, chirp){
+		if (req.body.deletechirp === "delete-chirp") {
+			chirp.destroy().done(function() {
+				res.redirect("/");
+			});
+		} else {
+			chirp.updateAttributes({
+				chirp_text:req.body.chirp_text
+			}).done(function(){
+				res.redirect("/");
+			});
+		}
 	});
 });
 
